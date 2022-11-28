@@ -1,5 +1,6 @@
 import { ProviderOptions } from "../../types";
 import { everDefaultLinks } from "./everwallet";
+import { oxychatDefaultLinks } from "./oxychatwallet";
 import {
   getVenomAndroid,
   getVenomIos,
@@ -7,6 +8,7 @@ import {
   venomDefaultLinks,
 } from "./venomwallet";
 export * from "./everwallet";
+export * from "./oxychatwallet";
 export * from "./venomwallet";
 
 type linkCreator = (
@@ -49,6 +51,7 @@ type linkCreator = (
 const defaultLinks = {
   venomwallet: venomDefaultLinks,
   everwallet: everDefaultLinks,
+  oxychatwallet: oxychatDefaultLinks,
 };
 
 export const getValueByKey: (

@@ -5,7 +5,7 @@ import { getPromiseRaw, ProviderController } from "./controllers";
 import { EventController } from "./controllers/EventController";
 import {
   ToggleExtensionWindow,
-  toggleExtensionWindow
+  toggleExtensionWindow,
 } from "./helpers/backdrop";
 import {
   CLOSE_EVENT,
@@ -14,7 +14,7 @@ import {
   Events,
   EXTENSION_AUTH_EVENT,
   EXTENSION_WINDOW_CLOSED_EVENT,
-  SELECT_EVENT
+  SELECT_EVENT,
 } from "./helpers/events";
 import * as allProviders from "./providers";
 import { getThemeConfig, ThemeNameList, themesList } from "./themes";
@@ -23,7 +23,7 @@ import {
   SimpleFunction,
   ThemeConfig,
   UserProvidersOptions,
-  VenomConnectOptions
+  VenomConnectOptions,
 } from "./types";
 
 export const libName = "VenomConnect";
@@ -203,6 +203,10 @@ class VenomConnect {
           // проверяем что мобильный ever
         } else if (this.checkIsWalletBrowser().isEverWalletBrowser) {
           await this.connectTo("everwallet", "extension");
+
+          // проверяем что мобильный oxychat
+        } else if (this.checkIsWalletBrowser().isOxyWalletBrowser) {
+          await this.connectTo("oxychatwallet", "extension");
 
           // показываем обычный попап
         } else {
@@ -397,10 +401,15 @@ class VenomConnect {
     const isEverWalletBrowser = !!(
       navigator && navigator.userAgent.includes("EverWalletBrowser")
     );
+    const isOxyWalletBrowser = !!(
+      navigator && navigator.userAgent.includes("OxyWalletBrowser")
+    );
     return {
       isVenomWalletBrowser,
       isEverWalletBrowser,
-      isOneOfWalletBrowsers: isVenomWalletBrowser || isEverWalletBrowser,
+      isOxyWalletBrowser,
+      isOneOfWalletBrowsers:
+        isVenomWalletBrowser || isEverWalletBrowser || isOxyWalletBrowser,
     };
   };
 
