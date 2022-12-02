@@ -395,14 +395,22 @@ class VenomConnect {
   // --------------- PRIVATE METHODS --------------- //
 
   private checkIsWalletBrowser = () => {
+    const ids = this.options.map(({ id }) => id);
+
     const isVenomWalletBrowser = !!(
-      navigator && navigator.userAgent.includes("VenomWalletBrowser")
+      navigator &&
+      navigator.userAgent.includes("VenomWalletBrowser") &&
+      ids.includes("venomwallet")
     );
     const isEverWalletBrowser = !!(
-      navigator && navigator.userAgent.includes("EverWalletBrowser")
+      navigator &&
+      navigator.userAgent.includes("EverWalletBrowser") &&
+      ids.includes("everwallet")
     );
     const isOxyWalletBrowser = !!(
-      navigator && navigator.userAgent.includes("OxyWalletBrowser")
+      navigator &&
+      navigator.userAgent.includes("OxyWalletBrowser") &&
+      ids.includes("oxychatwallet")
     );
     return {
       isVenomWalletBrowser,
